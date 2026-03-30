@@ -19,7 +19,7 @@ The following **required** functionality is completed:
 - [x] **API call response results should appear random to the user**
   - Clicking on the API call button should generate a seemingly random new result each time
   - Note: Repeat results are permitted but the API used should have a reasonably large amount of data and repeats should not be frequent
-- [x] **Clicking on a displayed value for one attribute adds it to a displayed ban **list**
+- [x] **Clicking on a displayed value for one attribute adds it to a displayed ban list**
   - At least one attribute for each API result should be clickable
   - Clicking on a clickable attribute not on the ban list, should imnmediately add it to the ban list 
   - Clicking on an attribute in the ban list should immediately remove it from the ban list 
@@ -36,9 +36,6 @@ The following **optional** features are implemented:
   - A dedicated section of the application displays all the previous images/attributes seen before
   - Each time the API call button is clicked, the history updates with the newest API result
 
-The following **additional** features are implemented:
-
-* [ ] List anything else that you added to improve the site's functionality!
 
 ## Video Walkthrough
 
