@@ -2,9 +2,9 @@
 
 Submitted by: **Zainab Akhtar**
 
-This web app: **A Veni Vici-style NASA space explorer that lets you stumble through the cosmos one discovery at a time.**
+This web app: **A NASA Space Explorer that lets users randomly discover celestial content from NASA APIs. Each click reveals a new image or object from the cosmos, along with key details such as date, source, and type. Users can curate their experience by adding attributes to a ban list, preventing unwanted content from appearing in future discoveries. The app also maintains a session history so users can revisit past finds.**
 
-Time spent: **X** hours spent in total
+Time spent: **6** hours spent in total
 
 ## Required Features
 
@@ -44,10 +44,10 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='assets/nasa.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  
+GIF created with KAP
 <!-- Recommended tools:
 [Kap](https://getkap.co/) for macOS
 [ScreenToGif](https://www.screentogif.com/) for Windows
@@ -57,9 +57,14 @@ GIF created with ...
 
 Describe any challenges encountered while building the app.
 
+- NASA’s APOD API sometimes returns videos instead of images. This assignment only requires images, so videos display as a placeholder with a “VIDEO CONTENT · VISIT NASA.GOV” message.
+- Fetching random dates for APOD and random Sols for Mars Rover photos required careful handling to avoid empty results.
+- Ensuring the ban list prevented banned attribute values from showing required looping and retry logic.
+- Handling multiple NASA endpoints (APOD, Mars Rover, NEO) while maintaining consistent display attributes was tricky, but I implemented a unified fetch and renderCard workflow.
+
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2026] [Zainab Akhtar]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

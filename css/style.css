@@ -62,7 +62,7 @@ body::after {
   z-index: 0;
 }
 
-/* ===== HEADER ===== */
+
 header {
   position: relative;
   z-index: 10;
@@ -95,7 +95,7 @@ header {
   border-radius: 2px;
 }
 
-/* ===== LAYOUT ===== */
+
 .app {
   position: relative;
   z-index: 1;
@@ -106,7 +106,7 @@ header {
   min-height: calc(100vh - 72px);
 }
 
-/* ===== MAIN PANEL ===== */
+
 .main-panel {
   padding: 2.5rem 3rem;
   border-right: 1px solid var(--border);
@@ -165,7 +165,7 @@ header {
 
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-/* ===== CARD ===== */
+
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -262,7 +262,7 @@ header {
   overflow: hidden;
 }
 
-/* ===== ATTRIBUTES ===== */
+
 .attrs {
   display: flex;
   flex-wrap: wrap;
@@ -307,7 +307,7 @@ header {
   opacity: 0.5;
 }
 
-/* ===== EMPTY STATE ===== */
+
 .empty-state {
   display: flex;
   flex-direction: column;
@@ -339,7 +339,7 @@ header {
   line-height: 1.6;
 }
 
-/* ===== SIDEBAR ===== */
+
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -373,7 +373,7 @@ header {
   background: var(--border);
 }
 
-/* ===== BAN LIST ===== */
+
 .ban-list {
   display: flex;
   flex-direction: column;
@@ -418,7 +418,7 @@ header {
   padding: 0.5rem 0;
 }
 
-/* ===== HISTORY ===== */
+
 .history-section {
   flex: 1;
   padding: 1.5rem;

@@ -1,8 +1,8 @@
 
-// ===================== CONFIG =====================
+
 const NASA_API_KEY = 'UmZJzazwbpEK5wCFgwaDalufWbUhxReBlFFqTHgH'; // Works for demos; students can get free key at api.nasa.gov
 
-// ===================== STATE =====================
+
 const state = {
   banned: new Set(),
   history: [],
@@ -10,36 +10,55 @@ const state = {
   current: null,
 };
 
-// ===================== DATA SOURCES =====================
-// We pull from multiple NASA endpoints for variety
+
+// Pull from multiple NASA endpoints for variety
 const SOURCES = ['apod', 'mars', 'neo'];
 
 async function fetchAPOD() {
-  // Astronomy Picture of the Day — random date
-  const start = new Date('1995-06-16').getTime();
-  const end   = new Date().getTime();
-  const randDate = new Date(start + Math.random() * (end - start));
-  const d = randDate.toISOString().split('T')[0];
-
-  const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}&date=${d}`);
-  if (!res.ok) throw new Error('APOD fetch failed');
-  const data = await res.json();
-
-  if (data.media_type !== 'image') return null; // skip videos
-  return {
-    source: 'APOD',
-    title: data.title,
-    image: data.url,
-    hdimage: data.hdurl,
-    date: data.date,
-    desc: data.explanation,
-    attrs: [
-      { label: 'TYPE',     value: 'Astronomy Pic of the Day', bannableKey: 'TYPE:Astronomy Pic of the Day' },
-      { label: 'DATE',     value: data.date,                  bannableKey: `DATE:${data.date.slice(0,7)}` },
-      { label: 'SOURCE',   value: data.copyright ? cleanCopyright(data.copyright) : 'Public Domain', bannableKey: `CREDIT:${data.copyright ? cleanCopyright(data.copyright) : 'Public Domain'}` },
-    ]
-  };
-}
+    // Astronomy Picture of the Day — random date
+    const start = new Date('1995-06-16').getTime();
+    const end   = new Date().getTime();
+    const randDate = new Date(start + Math.random() * (end - start));
+    const d = randDate.toISOString().split('T')[0];
+  
+    const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}&date=${d}`);
+    if (!res.ok) throw new Error('APOD fetch failed');
+    const data = await res.json();
+  
+    // Video handling
+    if (data.media_type === 'video') {
+      return {
+        source: 'APOD',
+        title: data.title,
+        video: data.url,  
+        date: data.date,
+        desc: data.explanation,
+        attrs: [
+          { label: 'TYPE', value: 'Astronomy Video', bannableKey: 'TYPE:Astronomy Video' },
+          { label: 'DATE', value: data.date, bannableKey: `DATE:${data.date.slice(0,7)}` },
+          { label: 'SOURCE', value: data.copyright ? cleanCopyright(data.copyright) : 'Public Domain', bannableKey: `CREDIT:${data.copyright ? cleanCopyright(data.copyright) : 'Public Domain'}` },
+        ]
+      };
+    }
+  
+    
+    if (data.media_type !== 'image') return null;
+  
+    return {
+      source: 'APOD',
+      title: data.title,
+      image: data.url,
+      hdimage: data.hdurl,
+      date: data.date,
+      desc: data.explanation,
+      attrs: [
+        { label: 'TYPE',     value: 'Astronomy Pic of the Day', bannableKey: 'TYPE:Astronomy Pic of the Day' },
+        { label: 'DATE',     value: data.date,                  bannableKey: `DATE:${data.date.slice(0,7)}` },
+        { label: 'SOURCE',   value: data.copyright ? cleanCopyright(data.copyright) : 'Public Domain', bannableKey: `CREDIT:${data.copyright ? cleanCopyright(data.copyright) : 'Public Domain'}` },
+      ]
+    };
+  }
+  
 
 function cleanCopyright(str) {
   return str.replace(/\n/g, ' ').trim().slice(0, 40);
@@ -120,7 +139,7 @@ async function fetchNEO() {
   };
 }
 
-// ===================== CORE LOGIC =====================
+
 async function discover() {
   if (state.loading) return;
 
@@ -294,7 +313,7 @@ function renderHistory() {
   });
 }
 
-// ===================== TOAST =====================
+
 let toastTimer;
 function showToast(msg, type='') {
   const toast = document.getElementById('toast');
@@ -304,7 +323,7 @@ function showToast(msg, type='') {
   toastTimer = setTimeout(() => { toast.className = `toast ${type}`; }, 2500);
 }
 
-// ===================== KEYBOARD SHORTCUT =====================
+
 document.addEventListener('keydown', e => {
   if (e.code === 'Space' && e.target === document.body) {
     e.preventDefault();
